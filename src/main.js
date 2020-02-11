@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import dateFilter from './filters/date.filter'
 import currencyFilter from './filters/currency.filter'
+import tooltipDirective from './directives/tooltip.directive';
 import MessagePlugin from './utils/message.plugin'
 import AppLoader from './components/app/AppLoader';
 import './registerServiceWorker'
@@ -21,6 +22,7 @@ Vue.config.productionTip = false
 
 Vue.filter('date', dateFilter)
 Vue.filter('currencyFilter', currencyFilter)
+Vue.directive('tooltip', tooltipDirective)
 Vue.component('AppLoader', AppLoader)
 
 const firebaseConfig = {

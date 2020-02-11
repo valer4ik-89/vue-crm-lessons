@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import firebase from 'firebase/app';
 
 Vue.use(VueRouter)
 
@@ -28,7 +28,8 @@ const routes = [
     name: 'categories',
     meta: {
       layout: 'main',
-      title: "Categories"
+      title: "Categories",
+      auth: true
     },
     component: () => import ('../views/Categories.vue')
   },
@@ -37,7 +38,8 @@ const routes = [
     name: 'detail',
     meta: {
       layout: 'main',
-      title: "Detail"
+      title: "Detail",
+      auth: true
     },
     component: () => import ('../views/DetailRecord.vue')
   },
@@ -46,7 +48,8 @@ const routes = [
     name: 'history',
     meta: {
       layout: 'main',
-      title: "History"
+      title: "History",
+      auth: true
     },
     component: () => import ('../views/History.vue')
   },
@@ -55,7 +58,8 @@ const routes = [
     name: 'home',
     meta: {
       layout: 'main',
-      title: "Home"
+      title: "Home",
+      auth: true
     },
     component: () => import ('../views/Home.vue')
   },
@@ -64,7 +68,8 @@ const routes = [
     name: 'planing',
     meta: {
       layout: 'main',
-      title: "Planing"
+      title: "Planing",
+      auth: true
     },
     component: () => import ('../views/Planing.vue')
   },
@@ -73,7 +78,8 @@ const routes = [
     name: 'profile',
     meta: {
       layout: 'main',
-      title: "Profile"
+      title: "Profile",
+      auth: true
     },
     component: () => import ('../views/Profile.vue')
   },
@@ -82,7 +88,8 @@ const routes = [
     name: 'record',
     meta: {
       layout: 'main',
-      title: "New Record"
+      title: "New Record",
+      auth: true
     },
     component: () => import ('../views/NewRecord.vue')
   }
@@ -94,6 +101,11 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser
+  const requireAuth = to.meta.auth
+  if (requireAuth && !currentUser) {
+    next('/login?message=login')
+  }
   document.title = to.meta.title
   next()
 })
