@@ -29,9 +29,11 @@
 <script>
 import AppNavbar from '../components/app/AppNavbar'
 import AppSidebar from '../components/app/AppSidebar'
+import errorMixin from '../mixins/error.mixin';
 
 export default {
   name: 'main-layout',
+  mixins: [errorMixin],
   data() {
     return {
       isOpen: true,

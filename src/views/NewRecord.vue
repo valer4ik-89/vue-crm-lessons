@@ -13,7 +13,13 @@
     <form class="form" v-else @submit.prevent="onCreateRecord">
       <div class="input-field">
         <select ref="select" v-model="currentCategory">
-          <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.title }}</option>
+          <option 
+            v-for="cat in categories" 
+            :key="cat.id" 
+            :value="cat.id"
+            >
+              {{ cat.title }}
+          </option>
         </select>
         <label>Выберите категорию</label>
       </div>
