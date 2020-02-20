@@ -4,3 +4,6 @@ input:-internal-autofill-selected {
     background-image: none !important;
     color: -internal-light-dark-color(black, white) !important;
 }
+a{
+    outline: none
+}
