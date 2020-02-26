@@ -1,49 +1,47 @@
 <template>
   <ul class="sidenav app-sidenav" :class="{open: value}">
-
     <router-link
       v-for="link in links"
       :key="link.url"
-      tag='li'
+      tag="li"
       active-class="active"
       :to="link.url"
       :exact="link.exact"
     >
-      <a href="#" class="waves-effect waves-orange pointer">{{ link.title }}</a>
+      <a href="#" class="waves-effect waves-orange pointer">{{ link.title | localize}}</a>
     </router-link>
-    
   </ul>
 </template>
 
 <script>
 export default {
-  props: ['value'],
+  props: ["value"],
   data() {
     return {
       links: [
         {
-          title: 'Счет',
-          url: '/',
+          title: "Menu_Bill",
+          url: "/",
           exact: true
         },
         {
-          title: 'История',
-          url: '/history'
+          title: "Menu_History",
+          url: "/history"
         },
         {
-          title: 'Планирование',
-          url: '/planing'
+          title: "Menu_Planning",
+          url: "/planing"
         },
         {
-          title: 'Новая запись',
-          url: '/record'
+          title: "Menu_NewRecord",
+          url: "/record"
         },
         {
-          title: 'Категории',
-          url: '/categories'
-        },
+          title: "Menu_Categories",
+          url: "/categories"
+        }
       ]
-    }
+    };
   }
-}
+};
 </script>

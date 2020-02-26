@@ -12,26 +12,21 @@ export default new Vuex.Store({
     error: null
   },
   mutations: {
-    setError(state, error){ 
+    setError(state, error) {
       state.error = error
     },
-    clearError(state){
+    clearError(state) {
       state.error = null
     }
   },
   actions: {
     async fetchCurrency() {
-      const key = process.env.VUE_APP_CURRENCY
-      
-      const res = await fetch(`https://free.currconv.com/api/v7/convert?q=UAH_USD,UAH_EUR&apiKey=${key}`)
-                        .then(res => {                          
-                          return res.json()
-                        })
-                        .then(res => {
-                          const currencies = Object.values(res.results)
-                          return currencies
-                        })
-                        console.log(res);
+      const res = await fetch(
+        `https://api.exchangerate-api.com/v4/latest/EUR`
+      ).then(res => {
+        return res.json()
+      })
+      console.log(res)
       return res
     }
   },

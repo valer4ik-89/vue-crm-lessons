@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import firebase from 'firebase/app';
+import firebase from 'firebase/app'
 
 Vue.use(VueRouter)
 
@@ -9,8 +9,7 @@ const routes = [
     path: '/login',
     name: 'login',
     meta: {
-      layout: "empty",
-      title: 'Login'
+      layout: 'empty'
     },
     component: () => import('../views/Login.vue')
   },
@@ -18,8 +17,7 @@ const routes = [
     path: '/register',
     name: 'register',
     meta: {
-      layout: "empty",
-      title: "Register"
+      layout: 'empty'
     },
     component: () => import('../views/Register.vue')
   },
@@ -28,70 +26,63 @@ const routes = [
     name: 'categories',
     meta: {
       layout: 'main',
-      title: "Categories",
       auth: true
     },
-    component: () => import ('../views/Categories.vue')
+    component: () => import('../views/Categories.vue')
   },
   {
     path: '/detail/:id',
     name: 'detail',
     meta: {
       layout: 'main',
-      title: "Detail",
       auth: true
     },
-    component: () => import ('../views/DetailRecord.vue')
+    component: () => import('../views/DetailRecord.vue')
   },
   {
     path: '/history',
     name: 'history',
     meta: {
       layout: 'main',
-      title: "History",
       auth: true
     },
-    component: () => import ('../views/History.vue')
+    component: () => import('../views/History.vue')
   },
   {
     path: '/',
     name: 'home',
     meta: {
       layout: 'main',
-      title: "Home",
       auth: true
     },
-    component: () => import ('../views/Home.vue')
+    component: () => import('../views/Home.vue')
   },
   {
     path: '/planing',
     name: 'planing',
     meta: {
       layout: 'main',
-      title: "Planing",
       auth: true
     },
-    component: () => import ('../views/Planing.vue')
+    component: () => import('../views/Planing.vue')
   },
   {
     path: '/profile',
     name: 'profile',
     meta: {
       layout: 'main',
-      title: "Profile",
       auth: true
     },
-    component: () => import ('../views/Profile.vue')
+    component: () => import('../views/Profile.vue')
   },
   {
     path: '/record',
     name: 'record',
     meta: {
       layout: 'main',
-      title: "New Record",
       auth: true
     },
-    component: () => import ('../views/NewRecord.vue')
+    component: () => import('../views/NewRecord.vue')
   }
 ]
 
@@ -106,7 +97,6 @@ router.beforeEach((to, from, next) => {
   if (requireAuth && !currentUser) {
     next('/login?message=login')
   }
-  document.title = to.meta.title
   next()
 })
 

@@ -3,22 +3,22 @@
     <div class="card orange darken-3 bill-card">
       <div class="card-content white-text">
         <div class="card-header">
-          <span class="card-title">Курс валют</span>
+          <span class="card-title">{{"CurrencyAmountTitle" | localize}}</span>
         </div>
         <table>
           <thead>
             <tr>
-              <th>Валюта</th>
-              <th>Курс</th>
-              <th>Дата</th>
+              <th>{{'Currency'|localize}}</th>
+              <th>{{'CurrencyType'|localize}}</th>
+              <th>{{'Date'|localize}}</th>
             </tr>
           </thead>
 
           <tbody>
-            <tr v-for="cur in rates">
-              <td>{{ cur.to }}</td>
-              <td>{{ (1 / cur.val).toFixed(2) | currencyFilter() }}</td>
-              <td>{{ date | date('date') }}</td>
+            <tr v-for="cur in currencies" :key="cur">
+              <td>{{ cur }}</td>
+              <td>{{ (base(cur)).toFixed(2) | currencyFilter() }}</td>
+              <td>{{ date | date('datetime') }}</td>
             </tr>
           </tbody>
         </table>
@@ -29,10 +29,16 @@
 
 <script>
 export default {
-  props: ['rates'],
+  props: ['rates', 'date'],
   data() {
     return {
-      date: new Date()
+      currencies: ['UAH', 'USD', 'EUR']
+    }
+  },
+  methods: {
+    base(key) {
+      const cur = this.rates['UAH'] / this.rates[key]
+      return cur
     }
   }
 }
