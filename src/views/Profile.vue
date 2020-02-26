@@ -37,49 +37,49 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import { required } from "vuelidate/lib/validators";
+import { mapGetters, mapActions } from 'vuex'
+import { required } from 'vuelidate/lib/validators'
 
 export default {
   metaInfo() {
     return {
-      title: this.$title("ProfileTitle")
-    };
+      title: this.$title('ProfileTitle')
+    }
   },
   data() {
     return {
-      name: "",
+      name: '',
       isRuLocale: true
-    };
+    }
   },
   validations: {
     name: { required }
   },
   computed: {
-    ...mapGetters(["info"])
+    ...mapGetters(['info'])
   },
   mounted() {
-    this.name = this.info.name;
-    this.isRuLocale = this.info.locale === "ru-RU";
+    this.name = this.info.name
+    this.isRuLocale = this.info.locale === 'ru'
   },
   methods: {
-    ...mapActions(["updateInfo"]),
+    ...mapActions(['updateInfo']),
 
     async submitHandler() {
       if (this.$v.$invalid) {
-        this.$v.$touch();
-        return;
+        this.$v.$touch()
+        return
       }
 
       try {
         await this.updateInfo({
           name: this.name,
-          locale: this.isRuLocale ? "ru-RU" : "en-US"
-        });
+          locale: this.isRuLocale ? 'ru' : 'en'
+        })
       } catch (e) {}
     }
   }
-};
+}
 </script>
 
 <style scoped>
