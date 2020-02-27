@@ -10,6 +10,6 @@ const locales = {
 }
 
 export default function localizeFilter(key) {
-  const locale = store.getters.info.locale || lang
+  const locale = store.getters.info.locale || 'ru'
   return locales[locale][key] || `[localize error]: key ${key} not found`
 }

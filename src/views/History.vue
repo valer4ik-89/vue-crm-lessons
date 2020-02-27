@@ -49,12 +49,18 @@ export default {
   mixins: [paginetionMixin],
   data: () => ({
     loading: true,
-    records: []
+    records: [],
+    categories: [],
+    chartOptions: {
+      scales: {
+        yAxes: [{ stacked: true }]
+      }
+    }
   }),
   async mounted() {
     this.records = await this.$store.dispatch('fetchRecords')
-    const categories = await this.$store.dispatch('fetchCategories')
-    this.setup(categories)
+    this.categories = await this.$store.dispatch('fetchCategories')
+    this.setup(this.categories)
     this.loading = false
   },
   methods: {
@@ -72,12 +78,20 @@ export default {
           }
         })
       )
-      this.renderChart({
-        labels: categories.map(c => c.title),
+      this.renderChart(this.chartData, this.chartOptions)
+    }
+  },
+  computed: {
+    recordsReverse() {
+      return this.records.slice().reverse()
+    },
+    chartData() {
+      return {
+        labels: this.categories.map(c => c.title),
         datasets: [
           {
             label: localize('CostsForCategories'),
-            data: categories.map(c => {
+            data: this.categories.map(c => {
               return this.records.reduce((total, r) => {
                 if (r.categoryId == c.id && r.type === 'outcome') {
                   total += r.amount
@@ -104,12 +118,7 @@ export default {
             borderWidth: 1
           }
         ]
-      })
-    }
-  },
-  computed: {
-    recordsReverse() {
-      return this.records.slice().reverse()
+      }
     }
   },
   components: {
